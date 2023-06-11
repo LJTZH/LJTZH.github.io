@@ -12,3 +12,18 @@ share/module_post_process.F（post_output_3d） <—— share/module_post_proces
 下一步的思路：
 1、无论是med_befor_solve_io的调用前、调用中、调用后，每个进程上的数据都不应该发生变化
 2、摸清每个进程上grapes的数据结构，找到合适的位置插桩，检查是哪里出的INF、NAN
+
+
+dyn_grapes/module_integrate.F中有个 DO step = start_step, end_step的循环，循环中即每个step中做的事情。
+
+CALL med_before_solve_io ( grid  , config_flags, start_step , step , end_step )
+CALL solve_interface ( grid,step )
+CALL med_calc_model_time ( grid , config_flags , start_step , step , end_step )
+
+solve_interface函数很简单，但是求解器函数solver_grapes非常长。
+CALL model_to_grid_config_rec( grid%id, model_config_rec , config_flags )
+CALL solver_grapes  ( grid, config_flags, step,          &
+# include <grapes_actual_args.inc>
+)
+
+
