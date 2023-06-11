@@ -1,0 +1,9 @@
+# 梳理
+
+gcr计算的路径：
+dyn_grapes/module_gcr.F(psolve_gcr_main) <—— dyn_grapes/module_gcr.F（solve_helmholts） <—— dyn_grapes/module_integrate.F（solver_grapes）
+<—— dyn_grapes/module_integrate.F（solve_interface） <—— dyn_grapes/module_integrate.F（37，integrate） <—— main/grapes.F（GRAPES）
+
+outpur_real_3d的路径
+share/module_post_process.F（post_output_3d） <—— share/module_post_process.F（post_process） <—— share/mediation_integrate.F （med_history_out）
+<—— share/mediation_integrate.F（med_before_solve_io） <—— dyn_grapes/module_integrate.F（35，integrate） <—— main/grapes.F（GRAPES）
