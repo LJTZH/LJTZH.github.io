@@ -7,3 +7,8 @@ dyn_grapes/module_gcr.F(psolve_gcr_main) <—— dyn_grapes/module_gcr.F（solve
 outpur_real_3d的路径
 share/module_post_process.F（post_output_3d） <—— share/module_post_process.F（post_process） <—— share/mediation_integrate.F （med_history_out）
 <—— share/mediation_integrate.F（med_before_solve_io） <—— dyn_grapes/module_integrate.F（35，integrate） <—— main/grapes.F（GRAPES）
+
+
+下一步的思路：
+1、无论是med_befor_solve_io的调用前、调用中、调用后，每个进程上的数据都不应该发生变化
+2、摸清每个进程上grapes的数据结构，找到合适的位置插桩，检查是哪里出的INF、NAN
